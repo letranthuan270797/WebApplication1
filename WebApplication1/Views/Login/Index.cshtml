@@ -24,17 +24,17 @@
             // var uID1 = document.getElementById("txtUID");
 
             // var pASS1 = document.getElementById("txtPWD");
-             var uID1 = $('#txtUID').val();
-             var pASS1 = $('#txtPWD').val();
+             var uid = $('#txtUID').val();
+             var pass = $('#txtPWD').val();
 
-            if (uID1 == '' || pASS1 == '') {
-                $('#ms').html('Nhap tai khoan va mat khau');
+            if (uid == '' || pass == '') {
+                $('#ms').html('Nhap tai khoan va mat khau. Empty ERROR');
                 IsRunning = false;
             }
             else {
                 var form = new FormData();
-                form.append("uid", uID1);
-                form.append("pass", pASS1);
+                form.append("uid", uid);
+                form.append("pass", pass);
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", 'https://localhost:44328/login/checklogin', true);
                 xhr.timeout = 10000;
@@ -51,7 +51,7 @@
                         }
                         else {
                             console.log('Nhap lai tai khoan va mat khau');
-                            $('#ms').html('Nhap tai khoan va mat khau');
+                            $('#ms').html('Sai ten dang nhap hoac mat khau');
                         }
                         IsRunning = false;
                     }

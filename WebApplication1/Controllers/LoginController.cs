@@ -56,7 +56,7 @@ namespace WebApplication1.Controllers
 
             //    }
             //}
-            if (uid == "admin"  && pwd == "123465")
+            if (uid == "admin"  && pwd == "123456")
             {
                 Session["user"] = "admin";
                 Session.Timeout = 5;
