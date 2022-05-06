@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/MyView/View.cshtml";
+}
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<h2>LOGIN</h2>
+
+<input type="text" id="txtUID" placeholder="Username" />
+<br />
+<input type="password" id="txtPWD" placeholder="Password" />
+<br />
+
+<div id="btbLOGIN" onclick="Login()" style="width:80px;text-align:center;background:#666;color:#fff;cursor:pointer">LOGIN</div>
+<p id="ms" style="color:red;"></p>
+
+<script type="text/javascript">
+    var IsRunning = false;
+    function Login() {
+        console.log("ABC");
+        if (!IsRunning) {
+            IsRunning = true;
+            // var uID1 = document.getElementById("txtUID");
+
+            // var pASS1 = document.getElementById("txtPWD");
+             var uID1 = $('#txtUID').val();
+             var pASS1 = $('#txtPWD').val();
+
+            if (uID1 == '' || pASS1 == '') {
+                $('#ms').html('Nhap tai khoan va mat khau');
+                IsRunning = false;
+            }
+            else {
+                var form = new FormData();
+                form.append("uid", uID1);
+                form.append("pass", pASS1);
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", 'https://localhost:44328/login/checklogin', true);
+                xhr.timeout = 10000;
+                xhr.ontimeout = function () {
+                    $('#ms').html('F5 de thu lai, Internet time out');
+                    IsRunning = false;
+                }
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var r = xhr.responseText;
+                        var j = JSON.parse(r);
+                        if (j.Data.status == "OK") {
+                            window.location = '/Home/Index';
+                        }
+                        else {
+                            console.log('Nhap lai tai khoan va mat khau');
+                            $('#ms').html('Nhap tai khoan va mat khau');
+                        }
+                        IsRunning = false;
+                    }
+                }
+                xhr.send(form);
+            }
+        }
+    }
+</script>
