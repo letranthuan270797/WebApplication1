@@ -1,11 +1,11 @@
-﻿
+﻿@model DatabasaProvider.kymdan_Users
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/MyView/View.cshtml";
 }
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <h2>LOGIN</h2>
+@*<p>@Model.Fullname</p>*@
 
 <input type="text" id="txtUID" placeholder="Username" />
 <br />
@@ -22,7 +22,6 @@
         if (!IsRunning) {
             IsRunning = true;
             // var uID1 = document.getElementById("txtUID");
-
             // var pASS1 = document.getElementById("txtPWD");
              var uid = $('#txtUID').val();
              var pass = $('#txtPWD').val();
@@ -46,8 +45,26 @@
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         var r = xhr.responseText;
                         var j = JSON.parse(r);
-                        if (j.Data.status == "OK") {
-                            window.location = '/Home/Index';
+                        if (j.Data.status == "OK" && j.Data.res != null) {
+                            //xác thực otp
+                            //$.ajax({
+                            //    url: '/Login/GetOtp',
+                            //    type: 'Get',
+                            //    data: { resOtp: j.Data.res },
+                            //    contentType: 'application/json; charset=utf-8',
+                            //    success: function (res,mess) {
+                            //        debugger;
+                            //        if (res !=  null && mess == true) {
+                            //        }
+                            //        else {
+
+                            //        }
+                            //    },
+                            //    error: function () {
+                            //        alert("error");
+                            //    }
+                            //}); 
+                            window.location = '/Login/GetOtp?resOtp=' + j.Data.res;
                         }
                         else {
                             console.log('Nhap lai tai khoan va mat khau');
@@ -60,4 +77,5 @@
             }
         }
     }
+
 </script>
