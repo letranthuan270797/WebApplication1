@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\WebApplication1",
+    "\\WebApplication1\\Controllers"
   ],
-  "SelectedNode": "\\C:\\Users\\Kymdan\\Source\\Repos\\WebApplication1qwewq",
+  "SelectedNode": "\\WebApplication1\\Controllers\\HomeController.cs",
   "PreviewInSolutionExplorer": false
 }
