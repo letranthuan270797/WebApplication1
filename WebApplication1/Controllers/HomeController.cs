@@ -13,7 +13,7 @@ namespace WebApplication1.Controllers
     {
         public ActionResult Index()
         {
-
+            //3123123
             //if (Session["user"]==null)
             //{
             //    Response.Redirect("https://localhost:44328/login/index");
