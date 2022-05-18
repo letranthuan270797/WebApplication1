@@ -407,3 +407,6 @@ FodyWeavers.xsd
 *.sln.iml
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp
+.vs/WebApplication1/v17/.suo
+.vs/WebApplication1/v17/.suo
+DatabasaProvider/obj/Debug/DatabasaProvider.pdb/
