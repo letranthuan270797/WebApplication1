@@ -1,0 +1,229 @@
+﻿@model List<DatabasaProvider.kymdan_Users>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<table border="1" cellpadding="0" id="UserList">
+    <tr>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Name</th>
+        <th>Action</th>
+    </tr>
+    @foreach (DatabasaProvider.kymdan_Users item in Model)
+    {
+        <tr id="tr_@item.ID">
+            <td class="uid">@item.Uid</td>
+            <td class="pwd">@item.Pwd</td>
+            <td class="name">@item.Fullname</td>
+            <td>
+                <a href="javascript:Delete('@item.ID','@item.Fullname')">
+                    [Delete]
+                </a>
+                &nbsp;
+                <a href="javascript:BeginEdit('@item.ID','@item.Uid','@item.Fullname')">
+                    [EDIT]
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+<h2 id="TT">ADD</h2>
+<input type="text" id="txtUID" placeholder="Nhap Username" />
+<br />
+<input type="password" id="txtPWD" placeholder="Nhap Password" />
+<br />
+<input type="password" id="txtPWD2" placeholder="Nhap lai Password" />
+<br />
+<input type="text" id="txtName" placeholder="Nhap Username" />
+<br />
+@*<input type="button" onclick="AddNewUsers()" value="ADD 1 NEW" />*@
+<div id="lblAddOrEdit" style="padding:5px;border:1px solid #ccc;width:80px;text-align:center" onclick="AddOrEdit()">ADD</div>
+<p id="lblMS" style="padding:8px;border:1px solid #4cff00;display:none"></p>
+<script>
+
+    //Nhan biet ADD or EDIT
+    var EditMode = false;
+    var EditID = '';
+
+    //Add - Edit
+    function AddOrEdit() {
+        if (EditMode) {
+            SaveEdit();
+        }
+        else {
+            AddNewUser();
+        }
+    }
+
+    //Them moi 1 row
+    function AddNewUser() {
+
+        //Kiem tra
+        var uid = $('#txtUID').val();
+        var pwd1 = $('#txtPWD').val();
+        var pwd2 = $('#txtPWD2').val();
+        var name = $('#txtName').val();
+
+        if (uid == '' || pwd1 == '' || pwd2 == '' || name == '') {
+            $('#lblMS').html('Phai nhap du tat ca thong tin');
+            $('#lblMS').css('boder-color', 'red');
+            $('#lblMS').css('color', 'red');
+            $('#lblMS').css('display', 'block');
+            return;
+        }
+        else if (pwd1 != pwd2) {
+            $('#lblMS').html('Mat khau va mat khau nhap lai khong giong nhau');
+            $('#lblMS').css('boder-color', 'red');
+            $('#lblMS').css('color', 'red');
+            $('#lblMS').css('display', 'block');
+            return;
+        }
+        // AJAX
+        var form = new FormData();
+        form.append("uid", uid);
+        form.append("pwd", pwd1);
+        form.append("name", name);
+        //AJAX Request
+        var xhr = new XMLHttpRequest();
+        //xhr.open("POST",'https://localhost:44328/Home/AddUser', true);
+        xhr.open("POST", domain + '/Home/AddUser', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var content = xhr.responseText;
+                var json_ct = JSON.parse(content);
+                if (json_ct.Data.status == "OK") {
+                    var IDnew = json_ct.Data.NewID;
+                    //Them dong moi
+                    //var tr = '<tr><td>' + uid + '</td><td>' + pwd1 + '</td><td>' + name + '</td><td></td></tr>';
+                    var tr = `<tr id="tr_${IDnew}"><td>  ${uid} </td><td> ${pwd1} </td><td> ${name}</td><td>  <a href="javascript:Delete('${IDnew}','${name}')">[Delete]</a>  &nbsp; <a href="javascript:BeginEdit('${IDnew}','${uid}','${name}')">[EDIT]</a> </td></tr>`;
+                    $('#UserList').append(tr);
+                    $('#lblMS').html('Da them moi thanh cong');
+                    $('#lblMS').css('boder-color', 'green');
+                    $('#lblMS').css('color', 'green');
+                    $('#lblMS').css('display', 'block');
+                    //Xoa hien thi
+                    $('#txtUID').val('');
+                    $('#txtPWD').val('');
+                    $('#txtPWD2').val('');
+                    $('#txtName').val('');
+
+                } else {
+                    $('#lblMS').html(json_ct.Data.message);
+                    $('#lblMS').css('boder-color', 'red');
+                    $('#lblMS').css('color', 'red');
+                    $('#lblMS').css('display', 'block');
+                }
+            }
+        }
+        xhr.send(form);
+    }
+    //Xoa bo 1 row
+    function Delete(id, name) {
+        if (confirm('Are you sure delete it:' + name + '?')) {
+            var form = new FormData();
+            form.append('id', id);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", domain + '/Home/DeleteUser', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var content = xhr.responseText;
+                    var json_ct = JSON.parse(content);
+                    if (json_ct.Data.status == "OK") {
+                        // Delete Complete
+                        $('#tr_' + id).remove();
+                    }
+                    else {
+                        // Loi ERROR
+                        alert('Loi : ' + json_ct.Data.message)
+                    }
+                }
+            }
+            xhr.send(form);
+        }
+    }
+    // EDIT >1 : Hien thi du lieu de chinh sua
+    function BeginEdit(id, uid, name) {
+        EditMode = true;
+        $('#TT').html('EDIT');
+        $('#lblAddOrEdit').html('Save');
+
+        $('#txtUID').val(uid);
+        $('#txtName').val(name);
+        $('#txtPWD').val('');
+        $('#txtPWD2').val('');
+
+        EditID = id;
+    }
+
+    // EDIT >2 : Luu thay doi
+    function SaveEdit() {
+        //Kiem tra
+        var uid = $('#txtUID').val();
+        var pwd1 = $('#txtPWD').val();
+        var pwd2 = $('#txtPWD2').val();
+        var name = $('#txtName').val();
+        if (uid == '' || name == '') {
+            $('#lblMS').html('Phai nhap du tat ca thong tin, bo qua pass neu khong can thay doi');
+            $('#lblMS').css('boder-color', 'red');
+            $('#lblMS').css('color', 'red');
+            $('#lblMS').css('display', 'block');
+            return;
+        }
+        else if (pwd1 != '' && pwd1 != pwd2) {
+            $('#lblMS').html('Mat khau va mat khau nhap lai khong giong nhau');
+            $('#lblMS').css('boder-color', 'red');
+            $('#lblMS').css('color', 'red');
+            $('#lblMS').css('display', 'block');
+            return;
+        }
+        // AJAX
+        var form = new FormData();
+        form.append("id", EditID);
+        form.append("uid", uid);
+        form.append("pwd", pwd1);
+        form.append("name", name);
+        //AJAX Request
+        var xhr = new XMLHttpRequest();
+        //xhr.open("POST",'https://localhost:44328/Home/EditUser', true);
+        xhr.open("POST", domain + '/Home/EditUser', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var content = xhr.responseText;
+                var json_ct = JSON.parse(content);
+                if (json_ct.Data.status == "OK") {
+
+                    //Cap nhat hien thi
+                    $('#tr_' + EditID + ' .uid').html(uid);
+                    $('#tr_' + EditID + ' .name').html(name);
+                    if (pwd1 != '') {
+                        $('#tr_' + EditID + ' .pwd').html(pwd1);
+                    }
+                    // Thong bao
+                    $('#lblMS').html('Da cap nhat DU LIEU thanh cong');
+                    $('#lblMS').css('boder-color', 'green');
+                    $('#lblMS').css('color', 'green');
+                    $('#lblMS').css('display', 'block');
+                    // Xoa du lieu Form
+                    $('#txtUID').val('');
+                    $('#txtPWD').val('');
+                    $('#txtPWD2').val('');
+                    $('#txtName').val('');
+
+                    // Change mode to ADD
+                    EditMode = false;
+                    $('#lblAddOrEdit').html('ADD');
+                    EditID = '';
+                    $('#TT').html('ADD');
+                } else {
+                    $('#lblMS').html(json_ct.Data.message);
+                    $('#lblMS').css('boder-color', 'red');
+                    $('#lblMS').css('color', 'red');
+                    $('#lblMS').css('display', 'block');
+                }
+            }
+        }
+        xhr.send(form);
+    }
+
+</script>
