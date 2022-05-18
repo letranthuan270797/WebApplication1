@@ -71,7 +71,7 @@ namespace WebApplication1.Controllers
                 var authToken = ConfigurationManager.AppSettings["SMSAccountPassword"];
                 TwilioClient.Init(acountid, authToken);
                 var to = new PhoneNumber("+84384443542");
-                var from = new PhoneNumber("+14094985275");
+                var from = ConfigurationManager.AppSettings["SMSAccountFrom"];
                 string otp =string.Empty;
                 Random rd = new Random();
                 for(int i = 0;i<5; i++)
