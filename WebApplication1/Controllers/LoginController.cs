@@ -79,11 +79,11 @@ namespace WebApplication1.Controllers
                     int temp = rd.Next(0, 10);
                     otp += temp;
                 }
-                var mess = MessageResource.Create(
-                        to: to,
-                        from: from,
-                        body: otp
-                    );
+                //var mess = MessageResource.Create(
+                //        to: to,
+                //        from: from,
+                //        body: otp
+                //    );
                 jr.Data = new
                 {
                     status = "OK",
