@@ -1,2 +1,5 @@
 .sou
 .vs/
+packages/
+.git/
+.tmp.driveupload/
