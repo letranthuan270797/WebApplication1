@@ -2,18 +2,58 @@
 @{
     ViewBag.Title = "Index";
 }
+<style>
+    .wrapper {
+        margin-top: 160px;
+        margin-bottom: 160px;
+    }
+    .form-signin {
+      max-width: 380px;
+      padding: 15px 49px 45px;
+      margin: 0 auto;
+      background-color: #fff;
+      border: 1px solid rgba(0,0,0,0.1);
+		
+	}
+    .form-control {
+        position: relative;
+        font-size: 16px;
+        height: auto;
+        padding: 10px;
+    }
+    input[type="text"] {
+        margin-bottom: -1px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
 
+    input[type="password"] {
+        margin-bottom: 20px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <h2>LOGIN</h2>
 @*<p>@Model.Fullname</p>*@
 
-<input type="text" id="txtUID" placeholder="Username" />
-<br />
-<input type="password" id="txtPWD" placeholder="Password" />
-<br />
+@*<input type="text" id="txtUID" placeholder="Username" />
+    <br />
+    <input type="password" id="txtPWD" placeholder="Password" />
+    <br />
 
-<div id="btbLOGIN" onclick="Login()" style="width:80px;text-align:center;background:#666;color:#fff;cursor:pointer">LOGIN</div>
-<p id="ms" style="color:red;"></p>
+    <div id="btbLOGIN" onclick="Login()" style="width:80px;text-align:center;background:#666;color:#fff;cursor:pointer">LOGIN</div>*@
+<div class="wrapper">
+    <div class="form-signin">
+        <h2 class="form-signin-heading">Please login</h2>
+        <input type="text" class="form-control" id="txtUID" name="txtUID" placeholder="Email Address" required="" autofocus="" />
+        <input type="password" class="form-control" id="txtPWD" name="txtPWD" placeholder="Password" required="" />
+        
+        <button class="btn btn-lg btn-primary btn-block" onclick="Login()">Login</button>
+        <p id="ms" style="color:red;"></p>  
+    </div>
+</div>
 
 <script type="text/javascript">
     var IsRunning = false;
@@ -22,15 +62,16 @@
         if (!IsRunning) {
             IsRunning = true;
             // var uID1 = document.getElementById("txtUID");
-            // var pASS1 = document.getElementById("txtPWD");
-             var uid = $('#txtUID').val();
-             var pass = $('#txtPWD').val();
+            // var pASS1 = document.getElementById("txtPWD");//
+            var uid = $('#txtUID').val();
+            var pass = $('#txtPWD').val();
 
             if (uid == '' || pass == '') {
                 $('#ms').html('Nhap tai khoan va mat khau. Empty ERROR');
                 IsRunning = false;
             }
             else {
+                debugger;
                 var form = new FormData();
                 form.append("uid", uid);
                 form.append("pass", pass);
@@ -42,6 +83,7 @@
                     IsRunning = false;
                 }
                 xhr.onreadystatechange = function () {
+                    debugger;
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         var r = xhr.responseText;
                         var j = JSON.parse(r);
@@ -63,7 +105,7 @@
                             //    error: function () {
                             //        alert("error");
                             //    }
-                            //}); 
+                            //});
                             window.location = '/Login/GetOtp?resOtp=' + j.Data.res;
                         }
                         else {

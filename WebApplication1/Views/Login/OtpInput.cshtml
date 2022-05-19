@@ -1,17 +1,23 @@
 ﻿@model WebApplication1.Models.OtpModel
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
+<style>
+    #otpText {
+        width: 200px;
+        height: 25px;
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+</style>
 @using (Html.BeginForm("GetOtp", "Login", FormMethod.Post))
 {
-    @Html.TextBoxFor(x => x.otpText)
+    @Html.TextBoxFor(x => x.otpText, htmlAttributes: new { @class = "form-control", id = "otpText" })
     @Html.HiddenFor(x => x.otpkey)
 
 
-    <input type="submit" value="Xác thực"/>
-
+    <button id="btnXacThuc" class="btn btn-sm btn-success" type="submit">Xác thực</button>
 
     if (ViewBag.mess != null)
     {
+        //asd
         <script type="text/javascript" charset="utf-8">
             alert("@Html.Raw(ViewBag.mess)");
             //edit commit
