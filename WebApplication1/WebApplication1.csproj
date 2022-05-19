@@ -176,6 +176,7 @@
     <Content Include="fonts\JS\Test HTML\a_files\font-awesome.min.css" />
     <Content Include="fonts\JS\Test HTML\a_files\main.css" />
     <Content Include="fonts\JS\Test HTML\a_files\perfect-scrollbar.css" />
+    <Content Include="fonts\JS\Test HTML\a_files\popper.js" />
     <Content Include="fonts\JS\Test HTML\a_files\select2.min.css" />
     <Content Include="fonts\JS\Test HTML\a_files\util.css" />
     <Content Include="fonts\JS\Test HTML\css\main.css" />
@@ -204,6 +205,9 @@
     <Content Include="fonts\JS\Test HTML\a_files\s.js.download" />
     <Content Include="fonts\JS\Test HTML\a_files\select2.min.js.download" />
     <Content Include="fonts\JS\Test HTML\a_files\v652eace1692a40cfa3763df669d7439c1639079717194" />
+    <Content Include="fonts\JS\Test HTML\a_files\Lato-Bold.ttf" />
+    <Content Include="fonts\JS\Test HTML\a_files\Lato-Regular.ttf" />
+    <Content Include="fonts\JS\Test HTML\a_files\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
