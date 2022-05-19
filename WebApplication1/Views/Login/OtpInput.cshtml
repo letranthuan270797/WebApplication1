@@ -1,19 +1,31 @@
 ﻿@model WebApplication1.Models.OtpModel
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <style>
     #otpText {
         width: 200px;
-        height: 25px;
+        height: 30px;
         border: 1px solid rgba(0,0,0,0.1);
+        margin-left:1px;
+    }
+    .form-XacThu {
+        max-width: 380px;
+        padding: 45px 49px;
+        margin: 0 auto;
+        background-color: #fff;
+        border: 1px solid rgba(0,0,0,0.1);
+        margin-top: 100px;
     }
 </style>
 @using (Html.BeginForm("GetOtp", "Login", FormMethod.Post))
 {
-    @Html.TextBoxFor(x => x.otpText, htmlAttributes: new { @class = "form-control", id = "otpText" })
-    @Html.HiddenFor(x => x.otpkey)
-
-
-    <button id="btnXacThuc" class="btn btn-sm btn-success" type="submit">Xác thực</button>
+    <div class="form-XacThu">
+        @Html.TextBoxFor(x => x.otpText, htmlAttributes: new { @class = "", id = "otpText", placeholder ="Nhập mã xác thực" })
+        @Html.HiddenFor(x => x.otpkey)
+        <button id="btnXacThuc" class="btn btn-sm btn-primary" type="submit">Xác thực</button>
+    </div>
+    
 
     if (ViewBag.mess != null)
     {
