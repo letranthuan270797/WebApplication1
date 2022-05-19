@@ -14,6 +14,7 @@ namespace WebApplication1.Controllers
     public class LoginController : Controller
     {
         // GET: Login
+        //
         public ActionResult Index()
         {
             if (Session["user"] != null)
@@ -70,7 +71,7 @@ namespace WebApplication1.Controllers
                 var authToken = ConfigurationManager.AppSettings["SMSAccountPassword"];
                 TwilioClient.Init(acountid, authToken);
                 var to = new PhoneNumber("+84384443542");
-                var from = new PhoneNumber("+14094985275");
+                var from = ConfigurationManager.AppSettings["SMSAccountFrom"];
                 string otp =string.Empty;
                 Random rd = new Random();
                 for(int i = 0;i<5; i++)
@@ -78,11 +79,11 @@ namespace WebApplication1.Controllers
                     int temp = rd.Next(0, 10);
                     otp += temp;
                 }
-                var mess = MessageResource.Create(
-                        to: to,
-                        from: from,
-                        body: otp
-                    );
+                //var mess = MessageResource.Create(
+                //        to: to,
+                //        from: from,
+                //        body: otp
+                //    );
                 jr.Data = new
                 {
                     status = "OK",
