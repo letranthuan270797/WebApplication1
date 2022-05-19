@@ -44,13 +44,68 @@
 
 @* scripts template *@
 
-<script>
+<style>
+    .txt_Input {
+        width: 200px;
+        height: 30px;
+        border: 1px solid rgb(0, 0, 0) !important;
+        margin-left: 1px;
+        margin-bottom: 5px;
+
+    }
+    .form-add {
+        max-width: auto;
+        padding: 45px 49px;
+        margin: 0 auto;
+        background-color: #fff;
+        border: 1px solid rgba(0,0,0,0.1);
+        margin-top: auto;
+        margin-bottom: 25px;
+        background-color: #f2f2f2;
+    }
     
-</script>
+</style>
+
 <div class="limiter">
     <div class="container-table100">
         <div class="wrap-table100">
-            <div class="table100 ver1 m-b-110">
+            <div class=" ver1 m-b-110 form-add">
+                <table>
+                    <tr class="row_1">
+                        <th>Tên đăng nhập</th>
+                        <td>
+                            <input type="text" id="txtUID" placeholder="Nhập tên đăng nhập" class="txt_Input" />
+                        </td>
+                        <th>Mật khẩu</th>
+                        <td>
+                            <input type="password" id="txtPWD" placeholder="Nhập mật khẩu" class="txt_Input" />
+                        </td>
+                        <td>
+                            <div class="btn-primary" id="lblAddOrEdit" style="padding:5px;border:1px solid #ccc;width:80px;text-align:center" onclick="AddOrEdit()">Thêm</div>
+                        </td>
+                    </tr>
+                    <tr class="row2">
+                        <th>Nhập lại mật khẩu</th>
+                        <td>
+                            <input type="password" id="txtPWD2" placeholder="Nhập lai mật khẩu" class="txt_Input" />
+                        </td>
+                        <th>Họ và tên</th>
+                        <td>
+                            <input type="text" id="txtName" placeholder="Nhập họ và tên" class="txt_Input" />
+                        </td>
+                        <td></td>
+                    </tr>
+                    @*<tr>
+                        <td>
+                            <div id="lblAddOrEdit" style="padding:5px;border:1px solid #ccc;width:80px;text-align:center" onclick="AddOrEdit()">ADD</div>
+                        </td>
+                        <td></td>
+                    </tr>*@
+                </table>
+                <p id="lblMS" style="padding:8px;border:1px solid #4cff00;display:none"></p>
+
+            </div>
+            <div class="table100 ver2 m-b-110">
                 <div class="table100-head">
                     <table class="table-fixed" id="UserList">
                         <thead>
@@ -64,7 +119,7 @@
                         </thead>
                     </table>
                 </div>
-                <div class="table100-body" @*class="table100-body js-pscroll ps ps--active-y"*@ style="height: 300px;overflow: scroll;"  >
+                <div class="table100-body" @*class="table100-body js-pscroll ps ps--active-y"*@ style="height: 500px;overflow: scroll;"  >
                     <table>
                         <tbody>
                             @foreach (DatabasaProvider.kymdan_Users item in Model)
@@ -74,13 +129,19 @@
                                     <td class="cell100 column2 pwd">@item.Pwd</td>
                                     <td class="cell100 column3 name">@item.Fullname</td>
                                     <td class="cell100 column4 action">
-                                        <a href="javascript:Delete('@item.ID','@item.Fullname')">
-                                            [Delete]
-                                        </a>
-                                        &nbsp;
                                         <a href="javascript:BeginEdit('@item.ID','@item.Uid','@item.Fullname')">
-                                            [EDIT]
+                                            <span class="btn btn-primary btn-lg ">
+                                                Sửa
+                                            </span>
                                         </a>
+
+                                        &nbsp;
+                                        <a href="javascript:Delete('@item.ID','@item.Fullname')">
+                                            <span class="btn btn-danger btn-lg ">
+                                                Xóa
+                                            </span>
+                                        </a>
+                                        
                                     </td>
 
                                 </tr>
@@ -98,32 +159,8 @@
 </div>
 
 @* ------------------------------------------------------------------------------------- *@
-<table border="1" cellpadding="0" id="UserList">
-    <tr>
-        <th>Username</th>
-        <th>Password</th>
-        <th>Name</th>
-        <th>Action</th>
-    </tr>
-    @foreach (DatabasaProvider.kymdan_Users item in Model)
-    {
-        <tr id="tr_@item.ID">
-            <td class="uid">@item.Uid</td>
-            <td class="pwd">@item.Pwd</td>
-            <td class="name">@item.Fullname</td>
-            <td>
-                <a href="javascript:Delete('@item.ID','@item.Fullname')">
-                    [Delete]
-                </a>
-                &nbsp;
-                <a href="javascript:BeginEdit('@item.ID','@item.Uid','@item.Fullname')">
-                    [EDIT]
-                </a>
-            </td>
-        </tr>
-    }
-</table>
-<h2 id="TT">ADD</h2>
+
+@*<h2 id="TT">Thêm</h2>
 <input type="text" id="txtUID" placeholder="Nhap Username" />
 <br />
 <input type="password" id="txtPWD" placeholder="Nhap Password" />
@@ -132,9 +169,8 @@
 <br />
 <input type="text" id="txtName" placeholder="Nhap Username" />
 <br />
-@*<input type="button" onclick="AddNewUsers()" value="ADD 1 NEW" />*@
 <div id="lblAddOrEdit" style="padding:5px;border:1px solid #ccc;width:80px;text-align:center" onclick="AddOrEdit()">ADD</div>
-<p id="lblMS" style="padding:8px;border:1px solid #4cff00;display:none"></p>
+<p id="lblMS" style="padding:8px;border:1px solid #4cff00;display:none"></p>*@
 <script>
 
     //Nhan biet ADD or EDIT
@@ -241,7 +277,7 @@
     function BeginEdit(id, uid, name) {
         EditMode = true;
         $('#TT').html('EDIT');
-        $('#lblAddOrEdit').html('Save');
+        $('#lblAddOrEdit').html('Lưu');
 
         $('#txtUID').val(uid);
         $('#txtName').val(name);
