@@ -66,13 +66,13 @@
     
 </style>
 
-<div class="limiter">
+<div class="limiter" style="position:fixed">
     <div class="container-table100">
         <div class="wrap-table100">
             <div class=" ver1 m-b-110 form-add">
                 <table>
                     <tr class="row_1">
-                        <th>Tên đăng nhập</th>
+                        <th >Tên đăng nhập</th>
                         <td>
                             <input type="text" id="txtUID" placeholder="Nhập tên đăng nhập" class="txt_Input" />
                         </td>
@@ -130,15 +130,13 @@
                                     <td class="cell100 column3 name">@item.Fullname</td>
                                     <td class="cell100 column4 action">
                                         <a href="javascript:BeginEdit('@item.ID','@item.Uid','@item.Fullname')">
-                                            <span class="btn btn-primary btn-lg ">
-                                                Sửa
+                                            <span class="btn btn-primary btn-lg glyphicon glyphicon-pencil" title="sửa">
                                             </span>
                                         </a>
 
                                         &nbsp;
                                         <a href="javascript:Delete('@item.ID','@item.Fullname')">
-                                            <span class="btn btn-danger btn-lg ">
-                                                Xóa
+                                            <span class="btn btn-danger btn-lg glyphicon glyphicon-trash" title="xóa">
                                             </span>
                                         </a>
                                         
