@@ -1,0 +1,12 @@
+C:\Users\Kymdan\Source\Repos\WebApplication1qwewq\DatabasaProvider\bin\Debug\DatabasaProvider.dll.config
+C:\Users\Kymdan\Source\Repos\WebApplication1qwewq\DatabasaProvider\bin\Debug\DatabasaProvider.dll
+C:\Users\Kymdan\Source\Repos\WebApplication1qwewq\DatabasaProvider\bin\Debug\DatabasaProvider.pdb
+C:\Users\Kymdan\Source\Repos\WebApplication1qwewq\DatabasaProvider\bin\Debug\EntityFramework.dll
+C:\Users\Kymdan\Source\Repos\WebApplication1qwewq\DatabasaProvider\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Kymdan\Source\Repos\WebApplication1qwewq\DatabasaProvider\bin\Debug\EntityFramework.xml
+C:\Users\Kymdan\Source\Repos\WebApplication1qwewq\DatabasaProvider\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Kymdan\Source\Repos\WebApplication1qwewq\DatabasaProvider\obj\Debug\DatabasaProvider.csproj.AssemblyReference.cache
+C:\Users\Kymdan\Source\Repos\WebApplication1qwewq\DatabasaProvider\obj\Debug\DatabasaProvider.csproj.CoreCompileInputs.cache
+C:\Users\Kymdan\Source\Repos\WebApplication1qwewq\DatabasaProvider\obj\Debug\DatabasaProvider.csproj.CopyComplete
+C:\Users\Kymdan\Source\Repos\WebApplication1qwewq\DatabasaProvider\obj\Debug\DatabasaProvider.dll
+C:\Users\Kymdan\Source\Repos\WebApplication1qwewq\DatabasaProvider\obj\Debug\DatabasaProvider.pdb
