@@ -88,35 +88,45 @@
             <div class=" ver1 m-b-110 form-add">
                 <table>
                     <tr class="row_1">
+                        @* --------------------------------------------------------------------------------------- *@
                         <th class="font-roboto-title">Tên đăng nhập</th>
                         <td>
                             <input type="text" id="txtUID" placeholder="Nhập tên đăng nhập" class="txt_Input" />
                         </td>
+
+                        @* --------------------------------------------------------------------------------------- *@
                         <th class="font-roboto-title">Mật khẩu</th>
                         <td>
                             <input type="password" id="txtPWD" placeholder="Nhập mật khẩu" class="txt_Input" />
                         </td>
+                        @* --------------------------------------------------------------------------------------- *@
                         <td>
                             <div class="btn-primary" id="lblAddOrEdit" style="padding:5px;border:1px solid #ccc;width:80px;text-align:center" onclick="AddOrEdit()">Thêm</div>
                         </td>
                     </tr>
                     <tr class="row2">
-                        <th class="font-roboto-title">Nhập lại mật khẩu</th>
-                        <td>
-                            <input type="password" id="txtPWD2" placeholder="Nhập lai mật khẩu" class="txt_Input" />
-                        </td>
+                        @* --------------------------------------------------------------------------------------- *@
                         <th class="font-roboto-title">Họ và tên</th>
                         <td>
                             <input type="text" id="txtName" placeholder="Nhập họ và tên" class="txt_Input" />
                         </td>
+                        @* --------------------------------------------------------------------------------------- *@
+                       
+
+                        <th class="font-roboto-title">Nhập lại mật khẩu</th>
+                        <td>
+                            <input type="password" id="txtPWD2" placeholder="Nhập lai mật khẩu" class="txt_Input" />
+                        </td>
+                        @* --------------------------------------------------------------------------------------- *@
+
                         <td></td>
                     </tr>
                     @*<tr>
-                            <td>
-                                <div id="lblAddOrEdit" style="padding:5px;border:1px solid #ccc;width:80px;text-align:center" onclick="AddOrEdit()">ADD</div>
-                            </td>
-                            <td></td>
-                        </tr>*@
+            <td>
+                <div id="lblAddOrEdit" style="padding:5px;border:1px solid #ccc;width:80px;text-align:center" onclick="AddOrEdit()">ADD</div>
+            </td>
+            <td></td>
+        </tr>*@
                 </table>
                 <p id="lblMS" style="padding:8px;border:1px solid #4cff00;display:none"></p>
 
