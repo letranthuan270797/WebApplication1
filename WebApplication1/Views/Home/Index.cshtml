@@ -126,7 +126,9 @@
                     <table class="table-fixed" id="UserList">
                         <thead>
                             <tr class="row100 head">
-                                <th><input type="checkbox" class="select"></th>
+                                <td align="center">
+                                    <input type="checkbox" class="select" id="select-all" name="select-all">
+                                </td>
                                 <th class="cell100 title column1">Tên đăng nhập</th>
                                 <th class="cell100 title column2">Mật khẩu</th>
                                 <th class="cell100 title column3">Họ và tên</th>
@@ -142,7 +144,9 @@
                             @foreach (DatabasaProvider.kymdan_Users item in Model)
                             {
                             <tr class="row100 body" id="tr_@item.ID">
-                                <td><input type="checkbox" class="select"></td>
+                                <td align="center">
+                                    <input type="checkbox" class="select_item" name="@item.ID" id="@item.ID">
+                                </td>
                                 <td class="cell100 column1 uid">@item.Uid</td>
                                 <td class="cell100 column2 pwd">@item.Pwd</td>
                                 <td class="cell100 column3 name">@item.Fullname</td>
@@ -375,28 +379,38 @@
 
 </script>
 
-@* script template *@
+<script>
 
+    $(document).ready(function () {
+        $("#select-all").change(function () {
+            if (this.checked) {
+                $(':checkbox').each(function () {
+                    this.checked = true;
+                });
+            } else {
+                $(':checkbox').each(function () {
+                    this.checked = false;
+                });
+            }
+        });
 
-@*<script src="~/fonts/JS/Test HTML/a_files/jquery-3.2.1.min.js.download"></script>
+        $(".select_item").click(function () {
+            debugger;
+            if ($(this).is(":checked")) {
+                var isAllChecked = 0;
 
-    <script src="~/fonts/JS/Test HTML/a_files/popper.js.download"></script>
-    <script src="~/fonts/JS/Test HTML/a_files/bootstrap.min.js.download"></script>
+                $(".select_item").each(function () {
+                    if (!this.checked)
+                        isAllChecked = 1;
+                });
 
-    <script src="~/fonts/JS/Test HTML/a_files/select2.min.js.download"></script>
-
-
-
-    <script async="" src="~/fonts/JS/Test HTML/a_files/js"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-23581568-13');
-    </script>
-
-    <script src="~/fonts/JS/Test HTML/a_files/main.js.download"></script>
-    <script defer="" src="~/fonts/JS/Test HTML/a_files/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon="{&quot;rayId&quot;:&quot;70d9a0d7dd18a081&quot;,&quot;token&quot;:&quot;cd0b4b3a733644fc843ef0b185f98241&quot;,&quot;version&quot;:&quot;2021.12.0&quot;,&quot;si&quot;:100}" crossorigin="anonymous"></script>*@
-
-@* script template *@
+                if (isAllChecked == 0) {
+                    $("#select-all").prop("checked", true);
+                }
+            }
+            else {
+                $("#select-all").prop("checked", false);
+            }
+        });
+    });
+</script>
