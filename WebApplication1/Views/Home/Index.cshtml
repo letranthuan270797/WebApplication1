@@ -257,8 +257,8 @@
                     var IDnew = json_ct.Data.NewID;
                     //Them dong moi
                     //var tr = '<tr><td>' + uid + '</td><td>' + pwd1 + '</td><td>' + name + '</td><td></td></tr>';
-                    var tr = `<tr id="tr_${IDnew}"><td>  ${uid} </td><td> ${pwd1} </td><td> ${name}</td><td>  <a href="javascript:Delete('${IDnew}','${name}')">[Delete]</a>  &nbsp; <a href="javascript:BeginEdit('${IDnew}','${uid}','${name}')">[EDIT]</a> </td></tr>`;
-                    $('#UserList').append(tr);
+                    //var tr = `<tr id="tr_${IDnew}"><td>  ${uid} </td><td> ${pwd1} </td><td> ${name}</td><td>  <a href="javascript:Delete('${IDnew}','${name}')">[Delete]</a>  &nbsp; <a href="javascript:BeginEdit('${IDnew}','${uid}','${name}')">[EDIT]</a> </td></tr>`;
+                    //$('#UserList').append(tr);
                     $('#lblMS').html('Da them moi thanh cong');
                     $('#lblMS').css('boder-color', 'green');
                     $('#lblMS').css('color', 'green');
@@ -268,6 +268,7 @@
                     $('#txtPWD').val('');
                     $('#txtPWD2').val('');
                     $('#txtName').val('');
+                    window.location.reload();
 
                 } else {
                     $('#lblMS').html(json_ct.Data.message);
@@ -292,7 +293,8 @@
                     var json_ct = JSON.parse(content);
                     if (json_ct.Data.status == "OK") {
                         // Delete Complete
-                        $('#tr_' + id).remove();
+                        //$('#tr_' + id).remove();
+                        // Load DS khi xóa
                     }
                     else {
                         // Loi ERROR
