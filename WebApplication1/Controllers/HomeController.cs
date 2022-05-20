@@ -11,27 +11,12 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pagesize = 6)
         {
                         
-            //if (Session["user"]==null)
-            //{
-            //    Response.Redirect("https://localhost:44328/login/index");
-            //}
-            //else
-            //{
-            //    //TVLT_Users user = (TVLT_User)Session["user"];
-            //    //ViewBag.Name = user.FullName;
-            //}
-
-
-            //DBIO db = new DBIO();
-            //kymdan_Users u = db.GetObject_User("admin", "admin");            
-            //return View(u);
-
             DBIO db = new DBIO();
-            List<kymdan_Users> list = db.GetList_User();
-            return View(list);
+            //List<kymdan_Users> list = db.GetList_User();
+            return View(db.GetAllPage(page, pagesize));
 
         }
 

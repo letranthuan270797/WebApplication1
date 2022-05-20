@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using PagedList;
 namespace DatabaseIO
 {
     public class DBIO
@@ -64,6 +64,10 @@ namespace DatabaseIO
         public void Save()
         {
             mydb.SaveChanges();
+        }
+        public IEnumerable<kymdan_Users> GetAllPage(int page, int pagesize)
+        {
+            return mydb.kymdan_Users.OrderByDescending(x => x.Fullname).ToPagedList(page, pagesize);
         }
     }
 }

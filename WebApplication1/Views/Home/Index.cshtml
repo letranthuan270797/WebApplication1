@@ -1,4 +1,6 @@
-﻿@model List<DatabasaProvider.kymdan_Users>
+﻿@*@model List<DatabasaProvider.kymdan_Users>*@
+@model PagedList.IPagedList<DatabasaProvider.kymdan_Users>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Home Page";
 
@@ -180,6 +182,7 @@
                             }
                         </tbody>
                     </table>
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new {page}))
                     @*<div class="ps__rail-x" style="left: 0px; bottom: -167px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 167px; height: 585px; right: 5px;"><div class="ps__thumb-y" tabindex="0" style="top: 83px; height: 293px;"></div></div>*@
                 </div>
             </div>
